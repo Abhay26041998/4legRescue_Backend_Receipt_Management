@@ -1,4 +1,5 @@
 const sequelizeDBConfig = require("../config/db.config");
+const DataTypes = require("sequelize");
 
 const user_identity = sequelizeDBConfig.sequelize.define(
 	"user_identity",
@@ -12,6 +13,7 @@ const user_identity = sequelizeDBConfig.sequelize.define(
 			type: DataTypes.UUID,
 			defaultValue: DataTypes.UUIDV4,
 			allowNull: false,
+			primaryKey: true,
 		},
 		first_name: {
 			type: DataTypes.STRING,
@@ -45,11 +47,14 @@ const user_identity = sequelizeDBConfig.sequelize.define(
 		user_role: {
 			type: DataTypes.TINYINT,
 			allowNull: false,
+			defaultValue: 1,
+
 			// 1=Member 2=Admin
 		},
 		user_status: {
 			type: DataTypes.TINYINT,
 			allowNull: false,
+			defaultValue: 1,
 			// 1=Active, 0=InActive
 		},
 		createdAt: {
@@ -71,7 +76,7 @@ const user_identity = sequelizeDBConfig.sequelize.define(
 	}
 );
 
-sequelizeDBConfig
+sequelizeDBConfig.sequelize
 	.sync()
 	.then(() => {
 		console.log("User model has been synchronized with the database.");

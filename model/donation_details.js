@@ -1,4 +1,5 @@
 const sequelizeDBConfig = require("../config/db.config");
+const DataTypes = require("sequelize");
 
 const donation_details = sequelizeDBConfig.sequelize.define(
 	"donation_details",
@@ -115,7 +116,7 @@ const donation_details = sequelizeDBConfig.sequelize.define(
 	}
 );
 
-sequelizeDBConfig
+sequelizeDBConfig.sequelize
 	.sync()
 	.then(() => {
 		console.log("User model has been synchronized with the database.");
